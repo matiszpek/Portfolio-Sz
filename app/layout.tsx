@@ -1,16 +1,29 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geist = Geist({ 
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
+const geistMono = Geist_Mono({ 
+  subsets: ["latin"],
+  variable: "--font-mono",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-code",
+})
 
 export const metadata: Metadata = {
-  title: "Interactive Portfolio | Developer | AI | 3D | Innovation",
-  description: "A modern interactive portfolio showcasing development skills, projects, and creativity",
-  generator: "v0.app",
+  title: "Portfolio | Full Stack Developer",
+  description: "Portfolio de desarrollador - Explora mis proyectos, habilidades y experiencia en desarrollo web, AI y más.",
+  keywords: ["developer", "portfolio", "react", "nextjs", "typescript", "fullstack"],
+  authors: [{ name: "Developer" }],
   icons: {
     icon: [
       {
@@ -36,8 +49,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="es" className="dark">
+      <body className={`${geist.variable} ${geistMono.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

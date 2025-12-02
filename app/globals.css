@@ -4,35 +4,27 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light theme for Figma design */
-  --background: oklch(0.98 0.01 240);
-  --foreground: oklch(0.2 0.01 240);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.01 240);
-  --popover: oklch(0.98 0.01 240);
-  --popover-foreground: oklch(0.2 0.01 240);
-  --primary: oklch(0.6 0.24 264);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.95 0.01 240);
-  --secondary-foreground: oklch(0.2 0.01 240);
-  --muted: oklch(0.92 0.01 240);
-  --muted-foreground: oklch(0.45 0.01 240);
-  --accent: oklch(0.55 0.22 280);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.55 0.25 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.88 0.01 240);
-  --input: oklch(0.88 0.01 240);
-  --ring: oklch(0.6 0.24 264);
+  /* Dark theme - GitHub inspired */
+  --background: #0d1117;
+  --foreground: #e6edf3;
+  --card: #161b22;
+  --card-foreground: #e6edf3;
+  --popover: #161b22;
+  --popover-foreground: #e6edf3;
+  --primary: #58a6ff;
+  --primary-foreground: #0d1117;
+  --secondary: #21262d;
+  --secondary-foreground: #e6edf3;
+  --muted: #21262d;
+  --muted-foreground: #8b949e;
+  --accent: #238636;
+  --accent-foreground: #ffffff;
+  --destructive: #f85149;
+  --destructive-foreground: #ffffff;
+  --border: #30363d;
+  --input: #21262d;
+  --ring: #58a6ff;
   --radius: 0.5rem;
-  --sidebar: oklch(0.1 0.01 240);
-  --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.6 0.24 264);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.2 0.01 240);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.25 0.01 240);
-  --sidebar-ring: oklch(0.6 0.24 264);
 }
 
 .dark {
@@ -113,38 +105,86 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#0d1117] text-[#e6edf3];
+    font-family: var(--font-sans), system-ui, sans-serif;
   }
 }
 
-/* Scrollbar personalizado para tema oscuro del mind map */
+/* Scrollbar personalizado - GitHub dark theme */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
-  border-radius: 5px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(71, 85, 105, 0.8);
-  border-radius: 5px;
+  background: #30363d;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 116, 139, 0.9);
+  background: #484f58;
 }
 
-/* Animaciones smooth para el árbol del mind map */
-@keyframes slideInRight {
+/* Scrollbar thin variant */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #21262d;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #30363d;
+}
+
+/* Selection */
+::selection {
+  background: #388bfd33;
+  color: #e6edf3;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid #58a6ff;
+  outline-offset: 2px;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-10px);
   }
   to {
     opacity: 1;
@@ -152,15 +192,46 @@
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px #58a6ff33, 0 0 10px #58a6ff22;
   }
-  to {
-    opacity: 1;
+  50% {
+    box-shadow: 0 0 10px #58a6ff44, 0 0 20px #58a6ff33;
   }
 }
 
-.tree-animation {
-  animation: slideInRight 0.3s ease-out;
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.2s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Code block styling */
+pre {
+  tab-size: 2;
+}
+
+code {
+  font-family: var(--font-mono), 'JetBrains Mono', 'Fira Code', monospace;
 }
