@@ -186,8 +186,4 @@ Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 
 ## 🤝 Soporte
 
-Para preguntas o problemas, contacta: your.email@example.com
-
----
-
-Hecho con ❤️ usando v0 by Vercel
+Para preguntas o problemas, contacta: matirulosz@gmail.com
